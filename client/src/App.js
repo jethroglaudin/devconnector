@@ -3,6 +3,8 @@ import Navbar from './component/layout/Navbar';
 import Footer from './component/layout/Footer';
 import Landing from './component/layout/Landing';
 
+import './App.css';
+
 
  class App extends Component {
   render() {
