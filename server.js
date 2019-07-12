@@ -1,38 +1,49 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const passport = require('passport');
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const passport = require("passport");
+const path = require("path");
 
-const users = require('./routes/api/users');
-const profile = require('./routes/api/profile');
-const posts = require('./routes/api/posts');
+const users = require("./routes/api/users");
+const profile = require("./routes/api/profile");
+const posts = require("./routes/api/posts");
 
 const app = express();
 
 //Body Parser Middleware
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // DB Config
-const db = require('./config/keys').mongoURI;
+const db = require("./config/keys").mongoURI;
 
 //connect to MongoDB
 mongoose
-    .connect(db, { useNewUrlParser: true })
-    .then(() => console.log(`MongoDB Connected`))
-    .catch(err => console.log(err));
+  .connect(db, { useNewUrlParser: true })
+  .then(() => console.log(`MongoDB Connected`))
+  .catch(err => console.log(err));
 
 // Passport middleware
 app.use(passport.initialize());
 
-//Passport Config 
-require('./config/passport')(passport);
+//Passport Config
+require("./config/passport")(passport);
 
 //Use routes
-app.use('/api/users', users);
-app.use('/api/profile', profile);
-app.use('/api/posts', posts);
+app.use("/api/users", users);
+app.use("/api/profile", profile);
+app.use("/api/posts", posts);
+
+// Server static assets if in production
+if (Process.env.NODE_ENV === "production") {
+  // set static folder
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "buiild", "index.html"));
+  });
+}
 
 const port = process.env.PORT || 5000;
 
