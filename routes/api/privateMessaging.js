@@ -90,7 +90,22 @@ router.post(
 router.post(
   "/messages/:id",
   passport.authenticate("jwt", { session: false }),
-  (req, res) => {}
+  (req, res) => {
+    const { errors, isValid } = validatePrivateMessaging(req.body);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+    // Locate the message by finding the message's ID
+    Message.findById(req.params.id).then(msg => {
+      const newMessage = {
+        user: req.body.user,
+        text: req.body.text,
+        name: req.body.name,
+        avatar: req.body.avatar
+      };
+    });
+  }
 );
 
 module.exports = router;
