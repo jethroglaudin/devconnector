@@ -83,4 +83,14 @@ router.post(
   }
 );
 
+// @route  POST /api/messaging/messages/:id
+// @desc   Reply Messages
+// @access Private
+
+router.post(
+  "/messages/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {}
+);
+
 module.exports = router;
