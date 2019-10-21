@@ -6,6 +6,10 @@ const passport = require("passport");
 // Import Messaging model
 const Message = require("../../models/PrivateMessaging");
 
+// Import Profile model
+
+const Profile = require("../../models/Profile");
+
 // Validation
 const validatePrivateMessaging = require("../../validation/privateMessaging");
 
@@ -43,6 +47,30 @@ router.get(
       .catch(err =>
         res.status(404).json({ error: "No message found with provided id" })
       );
+  }
+);
+
+// @route   POST /api/messaging/
+// @desc    Create message
+// @access  Private
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validatePrivateMessaging(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    // get recpeient
+    const Recepient = req.body.Recepient;
+    
+    const newMessage = new Message({
+      user: req.body.user,
+      text: req.body.text,
+      name: req.body.name,
+      avatar: req.body.avatar
+    });
   }
 );
 
