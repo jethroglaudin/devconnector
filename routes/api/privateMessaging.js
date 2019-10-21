@@ -55,22 +55,33 @@ router.get(
 // @access  Private
 router.post(
   "/",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validatePrivateMessaging(req.body);
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+    // const { errors, isValid } = validatePrivateMessaging(req.body);
+    // if (!isValid) {
+    //   return res.status(400).json(errors);
+    // }
 
     // get recpeient
-    const Recepient = req.body.Recepient;
+    let recepient = req.body.recepient;
+
+    Profile.findOne({ handle: recepient}).then(profile => {
+      const RecepientId = profile.id;
+      console.log(profile)
+
+      const newMessage = new Message({
+        user: req.body.user,
+        recepient: recepient,
+        recepientId: RecepientId,
+        text: req.body.text,
+        name: req.body.name,
+        avatar: req.body.avatar
+      });
+      newMessage.save().then(message => res.json(message));
+    })
+    .catch(err => res.status(404).json({ error: "Username not found"}))
     
-    const newMessage = new Message({
-      user: req.body.user,
-      text: req.body.text,
-      name: req.body.name,
-      avatar: req.body.avatar
-    });
+    
   }
 );
 
