@@ -37,7 +37,11 @@ router.get(
 router.get(
   "/:id",
   passport.authenticate("jwt", { session: false }),
-  (req, res) => {}
+  (req, res) => {
+    Message.findById(req.params.id)
+    .then(message => res.json(message))
+    .catch(err => res.status(404).json({ error: "No message found with provided id" }))
+  }
 );
 
 module.exports = router;
