@@ -17,34 +17,42 @@ const PrivateMessagingSchema = new Schema({
   avatar: {
     type: String
   },
+  recepient: {
+    type: String,
+    required: true
+  },
+  recepientId: {
+    type: String
+  },
 
   replies: [
     {
-      
       user: {
         type: Schema.Types.ObjectId,
         ref: "users"
       },
 
       text: {
-          type: String, 
-          required: true
+        type: String,
+        required: true
       },
 
       name: {
-          type: String
+        type: String
       },
 
       avatar: {
-          type: String
+        type: String
       }
     }
   ],
   date: {
-      type: Date,
-      default: Date.now
+    type: Date,
+    default: Date.now
   }
 });
 
-
-module.exports = PrivateMessaging = mongoose.model("privateMessages", PrivateMessagingSchema)
+module.exports = PrivateMessaging = mongoose.model(
+  "privateMessages",
+  PrivateMessagingSchema
+);
