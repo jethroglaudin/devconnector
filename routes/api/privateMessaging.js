@@ -55,12 +55,12 @@ router.get(
 // @access  Private
 router.post(
   "/",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    // const { errors, isValid } = validatePrivateMessaging(req.body);
-    // if (!isValid) {
-    //   return res.status(400).json(errors);
-    // }
+    const { errors, isValid } = validatePrivateMessaging(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
 
     // get recpeient
     let recepient = req.body.recepient;
