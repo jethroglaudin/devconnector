@@ -65,23 +65,21 @@ router.post(
     // get recpeient
     let recepient = req.body.recepient;
 
-    Profile.findOne({ handle: recepient}).then(profile => {
-      const RecepientId = profile.id;
-      console.log(profile)
+    Profile.findOne({ handle: recepient })
+      .then(profile => {
+        const RecepientId = profile.id;
 
-      const newMessage = new Message({
-        user: req.body.user,
-        recepient: recepient,
-        recepientId: RecepientId,
-        text: req.body.text,
-        name: req.body.name,
-        avatar: req.body.avatar
-      });
-      newMessage.save().then(message => res.json(message));
-    })
-    .catch(err => res.status(404).json({ error: "Username not found"}))
-    
-    
+        const newMessage = new Message({
+          user: req.body.user,
+          recepient: recepient,
+          recepientId: RecepientId,
+          text: req.body.text,
+          name: req.body.name,
+          avatar: req.body.avatar
+        });
+        newMessage.save().then(message => res.json(message));
+      })
+      .catch(err => res.status(404).json({ error: "Username not found" }));
   }
 );
 
