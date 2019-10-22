@@ -126,7 +126,9 @@ router.delete(
   "/message/:id/:message_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-   
+   Message.findById(req.params.id).then(reply => {
+     // Check to see if the reply message exists
+   })
   }
 );
 
