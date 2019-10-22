@@ -13,7 +13,7 @@ const messaging = require("./routes/api/privateMessaging")
 const app = express();
 
 // Intilize cors middle for Cross Origin
-app.use(cors());
+app.use(cors())
 //Body Parser Middleware
 
 app.use(bodyParser.urlencoded({ extended: false }));
