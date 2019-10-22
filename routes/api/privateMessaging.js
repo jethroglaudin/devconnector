@@ -127,34 +127,52 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Message.findById(req.params.id)
-    .then(message => {
-      // Check to see if the reply message exists
-      //  console.log(reply);
-      if (
-        message.replies.filter(
-          reply => reply._id.toString() === req.params.message_id
-        ).length === 0
-      ) {
-        return res
-          .status(404)
-          .json({ messagenotfound: "This message does not exist" });
-      }
-      // Get the index of the comment so we can later remove it from the replies array
-      const removeIndex = message.replies
-        .map(item => item._id.toString())
-        .indexOf(req.params.message_id);
+      .then(message => {
+        // Check to see if the reply message exists
+        //  console.log(reply);
+        if (
+          message.replies.filter(
+            reply => reply._id.toString() === req.params.message_id
+          ).length === 0
+        ) {
+          return res
+            .status(404)
+            .json({ messagenotfound: "This message does not exist" });
+        }
+        // Get the index of the comment so we can later remove it from the replies array
+        const removeIndex = message.replies
+          .map(item => item._id.toString())
+          .indexOf(req.params.message_id);
 
         //Splice reply out of array
         message.replies.splice(removeIndex, 1);
-        message.save().then(message => res.json(message))
-    })
-    .catch(err => res.status(404).json({ messagenotfound: "No message found" }))
+        message.save().then(message => res.json(message));
+      })
+      .catch(err =>
+        res.status(404).json({ messagenotfound: "No message found" })
+      );
   }
 );
 
 // @route /api/messaging/:message_id
 // @desc  Remove reply from message
 // @access Private
-router.delete("/messages/:id")
+router.delete(
+  "/messages/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Message.findById(req.params.id).then(message => {
+      if ((message._id.toString() === req.params.id).length === 0) {
+        return res
+          .status(404)
+          .json({ conversationnotexist: "Conversation does not exist" });
+      }
+      Message.deleteOne({ _id: req.params.id}).then(
+        res.status(200).json({ msg: "Successfully deleted message" })
+      );
+    })
+    .catch(err => res.status(404).json({ messagenotfound: "No message found" }))
+  }
+);
 
 module.exports = router;
