@@ -122,13 +122,24 @@ router.post(
 // @route /api/messaging/:message_id
 // @desc  Remove reply from message
 // @access Private
-router.delete(
-  "/message/:id/:message_id",
+router.get(
+  "/messages/:id/:message_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-   Message.findById(req.params.id).then(reply => {
-     // Check to see if the reply message exists
-   })
+    Message.findById(req.params.id).then(message => {
+      // Check to see if the reply message exists
+      //  console.log(reply);
+      if (
+        message.replies.filter(
+          reply => replies._id.toString() === req.params.message_id
+        ).length === 0
+      ) {
+        return res
+          .status(404)
+          .json({ messagenotfound: "This message does not exist" });
+      }
+    });
+    res.json({ msg: "working" });
   }
 );
 
