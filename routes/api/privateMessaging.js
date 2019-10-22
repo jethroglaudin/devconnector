@@ -119,7 +119,7 @@ router.post(
   }
 );
 
-// @route /api/messaging/:message_id
+// @route /api/messaging/:id/:message_id
 // @desc  Remove reply from message
 // @access Private
 router.delete(
@@ -151,5 +151,10 @@ router.delete(
     .catch(err => res.status(404).json({ messagenotfound: "No message found" }))
   }
 );
+
+// @route /api/messaging/:message_id
+// @desc  Remove reply from message
+// @access Private
+router.delete("/messages/:id")
 
 module.exports = router;
