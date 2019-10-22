@@ -97,22 +97,36 @@ router.post(
       return res.status(400).json(errors);
     }
     // Locate the message by finding the message's ID
-    Message.findById(req.params.id).then(message => {
-      const newMessage = {
-        user: req.body.user,
-        text: req.body.text,
-        name: req.body.name,
-        avatar: req.body.avatar
-      };
+    Message.findById(req.params.id)
+      .then(message => {
+        const newMessage = {
+          user: req.body.user,
+          text: req.body.text,
+          name: req.body.name,
+          avatar: req.body.avatar
+        };
 
-      // Add newMessage payload into the replies array.
+        // Add newMessage payload into the replies array.
 
-      message.replies.unshift(newMessage);
+        message.replies.unshift(newMessage);
 
-      // save
-      message.save().then(message => res.json(message))
-    })
-    .catch(err => res.status(404).json({ messagenotfound: "No message found" }))
+        // save
+        message.save().then(message => res.json(message));
+      })
+      .catch(err =>
+        res.status(404).json({ messagenotfound: "No message found" })
+      );
+  }
+);
+
+// @route /api/messaging/:message_id
+// @desc  Remove reply from message
+// @access Private
+router.delete(
+  "/message/:id/:message_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+   
   }
 );
 
