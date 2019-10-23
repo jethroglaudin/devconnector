@@ -22,7 +22,12 @@ export const addMessage = messageData => dispatch => {
         payload: res.data
       })
     )
-    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
 };
 
 // GET Messages
@@ -39,7 +44,7 @@ export const getMessages = () => dispatch => {
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: null
       })
     );
 };
@@ -48,7 +53,7 @@ export const getMessages = () => dispatch => {
 export const getMessage = id => dispatch => {
   dispatch(setMessageLoading());
   axios
-    .get("/api/messaging/:id")
+    .get(`/api/messaging/${id}`)
     .then(res => {
       dispatch({
         type: GET_PRIVATE_MESSAGE,
@@ -61,6 +66,57 @@ export const getMessage = id => dispatch => {
         payload: err.response.data
       })
     );
+};
+
+// ADD REPLY
+export const addReply = (messageId, replyData) => dispatch => {
+  dispatch(clearErrors());
+  axios
+    .post(`/api/messaging/messages/${messageId}`, replyData)
+    .then(res =>
+      dispatch({
+        type: ADD_REPLIES,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// DELETE a Reply
+export const deleteReply = (messageId, replyId) => dispatch => {
+  axios
+    .delete(`/api/messaging/messages/${messageId}/${replyId}`)
+    .then(res =>
+      dispatch({
+        type: DELETE_REPLY,
+        payload: replyId
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+export const deleteConversation = id => dispatch => {
+  axios.delete(`/api/messaging/${id}`).then(res =>
+    dispatch({
+      type: DELETE_MESSAGE,
+      payload: id
+    })
+  )
+  .catch(err => 
+    dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+    }))
 };
 
 // SET MESSAGING LOADING STATE
