@@ -5,7 +5,7 @@ class privateMessages extends Component{
     render(){
         return(
             <div className="main">
-
+            <h2>TEST</h2>
             </div>
 
         );
