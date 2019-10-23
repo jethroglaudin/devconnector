@@ -230,6 +230,8 @@ router.post(
   }
 );
 
+
+
 // @route   Delete api/profile/experience/:exp_id
 // @desc    Delete experience from  profile
 // @access  Private
@@ -296,6 +298,8 @@ router.delete(
     })
   }
 );
+
+//@route  PUT  api/profile
 
 
 
