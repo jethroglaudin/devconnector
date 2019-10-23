@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   ADD_MESSAGE,
+  ADD_REPLIES,
   GET_ERRORS,
   MESSAGING_LOADING,
   GET_PRIVATE_MESSAGE,
@@ -26,7 +27,7 @@ export const addMessage = messageData => dispatch => {
 
 // GET Messages
 export const getMessages = () => dispatch => {
-  dispatch(se());
+  dispatch(setMessageLoading());
   axios
     .get("/api/messaging")
     .then(res => {
@@ -38,14 +39,28 @@ export const getMessages = () => dispatch => {
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.responnse.data
+        payload: err.response.data
       })
     );
 };
 
 // GET MESSAGE .... This will get the individual message
 export const getMessage = id => dispatch => {
-  dispatch();
+  dispatch(setMessageLoading());
+  axios
+    .get("/api/messaging/:id")
+    .then(res => {
+      dispatch({
+        type: GET_PRIVATE_MESSAGE,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
 };
 
 // SET MESSAGING LOADING STATE
@@ -57,8 +72,7 @@ export const setMessageLoading = () => {
 
 // Clear Errors
 export const clearErrors = () => {
-    return {
-      type: CLEAR_ERRORS
-    };
+  return {
+    type: CLEAR_ERRORS
   };
-  
+};
