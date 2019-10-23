@@ -4,7 +4,7 @@ import {
   ADD_REPLIES,
   GET_ERRORS,
   MESSAGING_LOADING,
-  GET_PRIVATE_MESSAGE,
+  GET_CONVERSATIONS,
   GET_PRIVATE_MESSAGES,
   DELETE_MESSAGE,
   DELETE_REPLY
@@ -30,14 +30,14 @@ export const addMessage = messageData => dispatch => {
     );
 };
 
-// GET Messages
+// GET ALL MESSAGES/Conversations 
 export const getMessages = () => dispatch => {
   dispatch(setMessageLoading());
   axios
     .get("/api/messaging")
     .then(res => {
       dispatch({
-        type: GET_PRIVATE_MESSAGES,
+        type: GET_CONVERSATIONS,
         payload: res.data
       });
     })
@@ -56,7 +56,7 @@ export const getMessage = id => dispatch => {
     .get(`/api/messaging/${id}`)
     .then(res => {
       dispatch({
-        type: GET_PRIVATE_MESSAGE,
+        type: GET_PRIVATE_MESSAGES,
         payload: res.data
       });
     })
