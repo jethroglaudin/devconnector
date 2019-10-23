@@ -8,7 +8,7 @@ import { clearCurrentProfile } from "../../actions/profileActions";
 class Navbar extends Component {
   onLogoutClick(e) {
     e.preventDefault();
-    this.props.clearCurrentProfile()
+    this.props.clearCurrentProfile();
     this.props.logoutUser();
   }
   render() {
@@ -16,12 +16,17 @@ class Navbar extends Component {
 
     const authLinks = (
       <ul className="navbar-nav ml-auto">
-      <li className="nav-item">
+        <li className="nav-item">
           <Link className="nav-link" to="/feed">
             Post Feed
           </Link>
         </li>
-      <li className="nav-item">
+        <li className="nav-item">
+          <Link className="nav-link" to="messaging">
+            Direct Messages
+          </Link>
+        </li>
+        <li className="nav-item">
           <Link className="nav-link" to="/dashboard">
             Dashboard
           </Link>
@@ -38,7 +43,7 @@ class Navbar extends Component {
               alt={user.name}
               style={{ width: "25px", marginRight: "5px" }}
               title="You must have a Gravatar connected to your email to display an image"
-            /> {' '}
+            />{" "}
             Logout
           </a>
         </li>
@@ -64,7 +69,7 @@ class Navbar extends Component {
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            Conligo 
+            Conligo
           </Link>
           <button
             className="navbar-toggler"
