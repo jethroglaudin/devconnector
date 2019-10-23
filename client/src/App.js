@@ -25,6 +25,8 @@ import Profile from "./components/profile/Profile";
 import NotFound from "./components/not-found/NotFound";
 import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
+import PrivateMessage from "./components/private-messaging/private-messaging";
+import PrivateMessagesFeed from "./components/private-messages/private-messages";
 
 
 
@@ -110,6 +112,20 @@ class App extends Component {
                   path="/post/:id"
                   component={Post}
                 />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/messages"
+                  component={PrivateMessagesFeed}
+                  />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/messages/:id"
+                  component={PrivateMessage}
+                  />
               </Switch>
               <Route exact path="/not-found" component={NotFound} />
             </div>
