@@ -6,7 +6,7 @@ import {
   MESSAGING_LOADING,
   GET_CONVERSATIONS,
   GET_PRIVATE_MESSAGES,
-  DELETE_MESSAGE,
+  DELETE_CONVERSATION,
   DELETE_REPLY
 } from "./types";
 import { clearErrors } from "./postActions";
@@ -108,7 +108,7 @@ export const deleteReply = (messageId, replyId) => dispatch => {
 export const deleteConversation = id => dispatch => {
   axios.delete(`/api/messaging/${id}`).then(res =>
     dispatch({
-      type: DELETE_MESSAGE,
+      type: DELETE_CONVERSATION,
       payload: id
     })
   )
