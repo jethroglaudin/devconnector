@@ -4,7 +4,7 @@ import {
   GET_PRIVATE_MESSAGE,
   GET_CONVERSATIONS,
   MESSAGING_LOADING,
-  DELETE_MESSAGE,
+  DELETE_CONVERSATION,
   DELETE_REPLY
 } from "../actions/types";
 
@@ -32,6 +32,28 @@ export default function(state = initialState, action) {
         ...state,
         conversations: action.payload,
         loading: false
+      };
+    case ADD_MESSAGE:
+      return {
+        ...state,
+        conversations: [action.payload, ...state.conversations]
+      };
+    case ADD_REPLIES:
+      return {
+        ...state,
+        replies: [action.payload, ...state.replies]
+      };
+    case DELETE_REPLY:
+      return {
+        ...state,
+        replies: state.replies.filter(reply => reply._id !== action.payload)
+      };
+    case DELETE_CONVERSATION:
+      return {
+        ...state,
+        conversations: state.conversations.filter(
+          convo => convo._id !== action.payload
+        )
       };
   }
 }
