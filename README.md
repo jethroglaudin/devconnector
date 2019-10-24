@@ -6,6 +6,13 @@ Traversy Walkthrough
 
 - Changed App Name to CONLIGO
 - Changed Background Img on Landing Page
+- Updated Navbar
+- Developers Dashboard is now private(must be signed in)
+
+
+
+# Major Alterations
+- Added Private Messaging Feature
 
 
 Deployed on heroku
