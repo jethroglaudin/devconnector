@@ -1,4 +1,4 @@
-import { GET_ERRORS, CLEAR_ERRORS } from '../actions/types';
+import { GET_ERRORS, CLEAR_ERRORS, CLEAR_CONVERSATION_ERRORS } from '../actions/types';
 
 const initialState = {};
   
@@ -8,6 +8,8 @@ const initialState = {};
             return action.payload 
         case CLEAR_ERRORS:
             return {};  
+        case CLEAR_CONVERSATION_ERRORS:
+            return {};
       default:
         return state;
     }
