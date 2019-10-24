@@ -26,7 +26,7 @@ class privateMessages extends Component {
           <div className="row">
             <div className="col-md-12">
               <ConversationForm />
-              {/* {messageContent} */}
+              {messageContent}
             
             </div>
           </div>
