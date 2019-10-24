@@ -107,7 +107,7 @@ export const deleteReply = (messageId, replyId) => dispatch => {
 };
 
 export const deleteConversation = id => dispatch => {
-  axios.delete(`/api/messaging/${id}`).then(res =>
+  axios.delete(`/api/messaging/messages/${id}`).then(res =>
     dispatch({
       type: DELETE_CONVERSATION,
       payload: id
