@@ -1,7 +1,7 @@
 import {
   ADD_MESSAGE,
   ADD_REPLIES,
-  GET_PRIVATE_MESSAGE,
+  GET_PRIVATE_MESSAGES,
   GET_CONVERSATIONS,
   MESSAGING_LOADING,
   DELETE_CONVERSATION,
@@ -21,7 +21,7 @@ export default function(state = initialState, action) {
         ...state,
         loading: true
       };
-    case GET_PRIVATE_MESSAGE:
+    case GET_PRIVATE_MESSAGES:
       return {
         ...state,
         replies: action.payload,
@@ -55,5 +55,7 @@ export default function(state = initialState, action) {
           convo => convo._id !== action.payload
         )
       };
+    default:
+        return state;
   }
 }
