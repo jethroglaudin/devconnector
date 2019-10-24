@@ -17,7 +17,7 @@ class ConversationItem extends Component {
             <a href="profile.html">
               <img
                 className="rounded-circle d-none d-md-block"
-                src={auth.user.avatar}
+                src={convos.avatar}
                 alt=""
               />
             </a>

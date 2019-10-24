@@ -33,6 +33,8 @@ class CommentItem extends Component {
                 className="btn btn-danger mr-1"
               >
                 <i className="fas fa-times" />
+                {" "}
+                Delete Comment
               </button>
             ) : null}
           </div>
