@@ -7,7 +7,8 @@ import {
   GET_CONVERSATIONS,
   GET_PRIVATE_MESSAGES,
   DELETE_CONVERSATION,
-  DELETE_REPLY
+  DELETE_REPLY,
+  CLEAR_CONVERSATION_ERRORS
 } from "./types";
 import { clearErrors } from "./postActions";
 
@@ -43,7 +44,7 @@ export const getMessages = () => dispatch => {
     })
     .catch(err =>
       dispatch({
-        type: GET_ERRORS,
+        type: GET_CONVERSATIONS,
         payload: null
       })
     );
@@ -127,8 +128,8 @@ export const setMessageLoading = () => {
 };
 
 // Clear Errors
-export const clearErrors = () => {
+export const clearConversationErrors = () => {
   return {
-    type: CLEAR_ERRORS
+    type: CLEAR_CONVERSATION_ERRORS
   };
 };
