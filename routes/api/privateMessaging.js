@@ -70,7 +70,7 @@ router.post(
         const RecepientId = profile.id;
 
         const newMessage = new Message({
-          user: req.body.user,
+          user: req.user.id,
           recepient: recepient,
           recepientId: RecepientId,
           text: req.body.text,
@@ -100,7 +100,7 @@ router.post(
     Message.findById(req.params.id)
       .then(message => {
         const newMessage = {
-          user: req.body.user,
+          user: req.user.id,
           text: req.body.text,
           name: req.body.name,
           avatar: req.body.avatar
