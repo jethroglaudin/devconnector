@@ -25,7 +25,7 @@ import Profile from "./components/profile/Profile";
 import NotFound from "./components/not-found/NotFound";
 import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
-import PrivateMessage from "./components/private-messaging/privateMessaging";
+import PrivateMessage from "./components/private-messaging/PrivateMessaging";
 import PrivateMessagesFeed from "./components/private-messages/privateMessages";
 
 
