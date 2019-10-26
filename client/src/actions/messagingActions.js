@@ -1,7 +1,6 @@
 import axios from "axios";
 import {
   ADD_MESSAGE,
-  ADD_REPLIES,
   GET_ERRORS,
   MESSAGING_LOADING,
   GET_CONVERSATIONS,
@@ -76,7 +75,7 @@ export const addReply = (messageId, replyData) => dispatch => {
     .post(`/api/messaging/messages/${messageId}`, replyData)
     .then(res =>
       dispatch({
-        type: ADD_REPLIES,
+        type: GET_PRIVATE_MESSAGES,
         payload: res.data
       })
     )
