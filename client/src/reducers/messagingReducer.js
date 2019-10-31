@@ -46,7 +46,8 @@ export default function(state = initialState, action) {
     case DELETE_REPLY:
       return {
         ...state,
-        replies: state.replies.filter(reply => reply._id !== action.payload)
+        replies: action.payload,
+        loading: false
       };
     case DELETE_CONVERSATION:
       return {
