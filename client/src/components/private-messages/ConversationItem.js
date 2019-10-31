@@ -48,7 +48,7 @@ ConversationItem.defaultProps = {
 };
 ConversationItem.propTypes = {
   deleteConversation: PropTypes.func.isRequired,
-  messaging: PropTypes.object.isRequired,
+  convos: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
 
