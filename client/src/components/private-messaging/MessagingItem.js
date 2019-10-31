@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 import { deleteReply } from "../../actions/messagingActions";
 
 class MessagingItem extends Component {
-  onDeleteClick(replyId) {
-    this.props.deleteReply(replyId);
+  onDeleteClick(replyId, messageId) {
+    this.props.deleteReply(replyId, messageId);
   }
 
   render() {
@@ -28,7 +28,7 @@ class MessagingItem extends Component {
             <p className="lead">{reply.text}</p>
             {reply.user === auth.user.id ? (
               <button
-                onClick={this.onDeleteClick.bind(this, replyId, reply._id)}
+                onClick={this.onDeleteClick.bind(this, reply._id, replyId)}
                 type="button"
                 className="btn btn-danger mr-1"
               >
