@@ -23,7 +23,7 @@ class PrivateMessaging extends Component {
     } else {
       replyContent = (
         <div> 
-          <MessagingItem reply={replies} />
+          <MessagingItem reply={replies} showActions={false} />
           <MessagingFeed replyId={replies._id} replies={replies.replies} />
           <MessagingForm replyId={replies._id} />
         </div>
