@@ -11,7 +11,7 @@ class MessagingItem extends Component {
   }
 
   render() {
-    const { reply, messageId, auth } = this.props;
+    const { reply, replyId, auth } = this.props;
     return (
       <div className="card card-body mb-3">
         <div className="row">
@@ -28,7 +28,7 @@ class MessagingItem extends Component {
             <p className="lead">{reply.text}</p>
             {reply.user === auth.user.id ? (
               <button
-                onClick={this.onDeleteClick.bind(this, messageId, reply._id)}
+                onClick={this.onDeleteClick.bind(this, replyId, reply._id)}
                 type="button"
                 className="btn btn-danger mr-1"
               >
