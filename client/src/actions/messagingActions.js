@@ -90,11 +90,11 @@ export const addReply = (messageId, replyData) => dispatch => {
 // DELETE a Reply
 export const deleteReply = (messageId, replyId) => dispatch => {
   axios
-    .delete(`/api/messaging/messages/${messageId}/${replyId}`)
+    .delete(`/api/messaging/messages/${replyId}/${messageId}`)
     .then(res =>
       dispatch({
         type: DELETE_REPLY,
-        payload: replyId
+        payload: res.data
       })
     )
     .catch(err =>
