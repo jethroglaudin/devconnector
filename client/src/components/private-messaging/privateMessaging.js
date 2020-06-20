@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import ConversationItem from "../private-messages/ConversationItem";
 import MessagingItem from "./MessagingItem"
 import MessagingFeed from "./MessagingFeed";
 import MessagingForm from "./MessagingForm";
