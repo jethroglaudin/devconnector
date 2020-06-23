@@ -1,6 +1,6 @@
-## DevConnector
+## Conligo
 Social network for developers
-Traversy Walkthrough
+
 
 ## Minor Alterations
 
