@@ -1,6 +1,9 @@
 ## Conligo
-Social network for developers
+Conligo is a Social network application that allows for developers to stay connected.
 
+
+# Major Alterations
+- Added Private Messaging Feature
 
 ## Minor Alterations
 
@@ -10,11 +13,15 @@ Social network for developers
 - Developers Dashboard is now private(must be signed in)
 
 
+## Built with
 
-# Major Alterations
-- Added Private Messaging Feature
+- React
+- JavaScript
+- NodeJS
+- ExpressJS
+- MongoDB
+- Redux
 
-
-Deployed on heroku
+Deployed on Heroku
 https://morning-scrubland-60459.herokuapp.com/
 
